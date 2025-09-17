@@ -27,11 +27,11 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = config(
-    "ALLOWED_HOSTS",
-    default="",
-    cast=lambda v: [h.strip() for h in v.split(",") if h.strip()]
-)
+ALLOWED_HOSTS = [
+    "chattie-backend-b8vvjb5gq-amorgraces-projects.vercel.app",
+    "localhost",
+    "127.0.0.1",
+]
 CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="").split(",")
 CORS_ALLOW_CREDENTIALS = config("CORS_ALLOW_CREDENTIALS", cast=bool)
 AUTH_USER_MODEL = 'chatapp.CustomUser'
