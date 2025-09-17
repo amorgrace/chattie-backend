@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'dj_rest_auth',
     'corsheaders',
     'drf_yasg',
-    "channels",
+    # "channels",
     'rest_framework_simplejwt', 
     'rest_framework_simplejwt.token_blacklist',
 ]
