@@ -27,14 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "chattie-backend-nine.vercel.app",
-    "chattie-backend-git-master-amorgraces-projects.vercel.app",
-    "chattie-backend-cwk2dvzwr-amorgraces-projects.vercel.app",
-    ".vercel.app",      # covers any future Vercel subdomain
-    "localhost",
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="").split(",")
 
 CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="").split(",")
 CORS_ALLOW_CREDENTIALS = config("CORS_ALLOW_CREDENTIALS", cast=bool)
