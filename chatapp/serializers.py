@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from dj_rest_auth.serializers import LoginSerializer
+from dj_rest_auth.serializers import LoginSerializer, UserDetailsSerializer
 from .models import *
 
 User = get_user_model()
@@ -22,15 +22,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class CustomLoginSerializer(LoginSerializer):
-    username = None
-    email = serializers.EmailField(required=True)
-
-    def validate(self, attrs):
-        attrs['username'] = attrs.get('email')
-        return super().validate(attrs)
+class AmorLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
     
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta(UserDetailsSerializer.Meta):
+        model = User
+        fields = ("username", "email",
+                  "phone_number")
 class ChatRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = ChatRoom

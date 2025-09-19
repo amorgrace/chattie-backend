@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from decouple import config
 import dj_database_url
 from pathlib import Path
+from drf_yasg import openapi
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -68,8 +69,16 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+}
+
+
 REST_AUTH_SERIALIZERS = {
-    "LOGIN_SERIALIZER": "chatapp.serializers.CustomLoginSerializer"
+    "LOGIN_SERIALIZER": "chatapp.serializers.CustomLoginSerializer",
+    "USER_DETAILS_SERIALIZER": "chatapp.serializers.CustomUserDetailsSerializer",
 }
 
 ROOT_URLCONF = 'chat.urls'
@@ -97,6 +106,17 @@ WSGI_APPLICATION = 'chat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Token": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Paste your token as: Token <your_token_here>",
+        }
+    },
+}
 
 
 DATABASES = {
